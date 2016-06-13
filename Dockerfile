@@ -19,6 +19,8 @@ RUN apt-get update \
 
 ADD ./rsyslog.conf /etc/rsyslog.conf
 
+CMD mkdir -p /etc/rsyslog-confd
+
 ADD ./cleanup-old-logs.sh /usr/local/bin/cleanup-old-logs.sh
 
 COPY /docker-entrypoint.sh /

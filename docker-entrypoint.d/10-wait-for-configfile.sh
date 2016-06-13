@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-FILE="/etc/rsyslog.d/rsyslog.conf"
+FILE="/etc/rsyslog-confd/rsyslog.conf"
 
 while [ ! -f "${FILE}" ]; do
   echo "waiting for ${FILE}"
