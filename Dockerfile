@@ -1,16 +1,10 @@
-FROM ubuntu:trusty
+FROM ubuntu:xenial
 MAINTAINER Marc Fournier <marc.fournier@camptocamp.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update \
  && apt-get -y upgrade \
- && apt-get -y --no-install-suggests --no-install-recommends install \
-    software-properties-common
-
-RUN add-apt-repository ppa:adiscon/v8-stable
-
-RUN apt-get update \
  && apt-get -y --no-install-suggests --no-install-recommends install \
     rsyslog \
     rsyslog-relp \
