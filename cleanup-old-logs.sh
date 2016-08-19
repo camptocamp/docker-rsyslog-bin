@@ -3,7 +3,8 @@
 set -e
 
 test -n "$1"
-test "$1" -gt "0"
+DAYS="$1"
+test "$DAYS" -gt "0" # sanity check
 
 check_du () {
   percent="$(df -P /var/log/ | tail -n1  | awk '{ print $5 }' | sed 's/%//')"
@@ -13,15 +14,15 @@ check_du () {
 }
 
 while true; do
-  echo "=> about to remove the following elements, which are older than ${1} days old:"
-  find /var/log -type f -mtime "+${1}" -ls -delete
+  echo "=> about to remove the following elements, which are older than ${DAYS} days old:"
+  find /var/log -type f -mtime "+${DAYS}" -ls -delete
   find /var/log -mindepth 1 -empty -ls -delete
   echo "=> about to compress the following logfiles, which are older than 1 day:"
   find /var/log -type f -mtime "+1" -name "*.log" -ls -exec gzip -9 {} \;
   echo "=> about to check disk usage:"
   if check_du; then
     echo "==> above threshold (65%), triggering cleanup"
-    for i in $(seq 1 $1 | tac); do
+    for i in $(seq 1 "$DAYS" | tac); do
       if check_du; then
         echo "==> due to space constraints, removing the following elements, which are older than ${i} days old:"
         find /var/log -type f -mtime "+${i}" -ls -delete
