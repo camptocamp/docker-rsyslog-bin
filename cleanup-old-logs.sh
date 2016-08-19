@@ -6,11 +6,15 @@ test -n "$1"
 DAYS="$1"
 test "$DAYS" -gt "0" # sanity check
 
+test -n "$2"
+PCT="$2"
+test "$PCT" -gt "0" # sanity check
+
 check_du () {
   percent="$(df -P /var/log/ | tail -n1  | awk '{ print $5 }' | sed 's/%//')"
   test "${percent}" -gt "0" || return 1 # sanity check
   echo "==> current disk usage: ${percent}%"
-  test "${percent}" -gt "65" && return 0
+  test "${percent}" -gt "$PCT" && return 0
 }
 
 while true; do
@@ -21,7 +25,7 @@ while true; do
   find /var/log -type f -mtime "+0" -name "*.log" -ls -exec gzip -9 {} \;
   echo "=> about to check disk usage:"
   if check_du; then
-    echo "==> above threshold (65%), triggering cleanup"
+    echo "==> above threshold (${PCT}%), triggering cleanup"
     for i in $(seq 0 "$DAYS" | tac); do
       if check_du; then
         echo "==> due to space constraints, removing the following elements, which are older than ${i} days old:"
