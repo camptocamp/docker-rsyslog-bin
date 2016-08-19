@@ -18,11 +18,11 @@ while true; do
   find /var/log -type f -mtime "+${DAYS}" -ls -delete
   find /var/log -mindepth 1 -empty -ls -delete
   echo "=> about to compress the following logfiles, which are older than 1 day:"
-  find /var/log -type f -mtime "+1" -name "*.log" -ls -exec gzip -9 {} \;
+  find /var/log -type f -mtime "+0" -name "*.log" -ls -exec gzip -9 {} \;
   echo "=> about to check disk usage:"
   if check_du; then
     echo "==> above threshold (65%), triggering cleanup"
-    for i in $(seq 1 "$DAYS" | tac); do
+    for i in $(seq 0 "$DAYS" | tac); do
       if check_du; then
         echo "==> due to space constraints, removing the following elements, which are older than ${i} days old:"
         find /var/log -type f -mtime "+${i}" -ls -delete
