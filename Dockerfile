@@ -6,8 +6,14 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update \
  && apt-get -y upgrade \
  && apt-get -y --no-install-suggests --no-install-recommends install \
+    software-properties-common \
+ && add-apt-repository ppa:adiscon/v8-stable \
+ && apt-get update \
+ && apt-get -y --no-install-suggests --no-install-recommends install \
     rsyslog \
     rsyslog-relp \
+    rsyslog-mmjsonparse \
+ && apt-get -y --purge --autoremove remove software-properties-common \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
