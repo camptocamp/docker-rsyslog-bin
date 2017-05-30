@@ -13,6 +13,7 @@ RUN apt-get update \
     rsyslog \
     rsyslog-relp \
     rsyslog-mmjsonparse \
+    less \
  && apt-get -y --purge --autoremove remove software-properties-common \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
