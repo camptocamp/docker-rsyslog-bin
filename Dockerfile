@@ -14,6 +14,8 @@ RUN apt-get update \
     rsyslog-relp \
     rsyslog-mmjsonparse \
     less \
+    netcat-openbsd \
+    curl \
  && apt-get -y --purge --autoremove remove software-properties-common \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
