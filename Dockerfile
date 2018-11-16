@@ -10,9 +10,14 @@ RUN apt-get update \
  && add-apt-repository ppa:adiscon/v8-stable \
  && apt-get update \
  && apt-get -y --no-install-suggests --no-install-recommends install \
-    rsyslog \
-    rsyslog-relp \
+    rsyslog=8.39.0-0adiscon5xenial1 \
+    rsyslog-elasticsearch \
+    rsyslog-kafka \
+    rsyslog-mmfields \
     rsyslog-mmjsonparse \
+    rsyslog-mmkubernetes \
+    rsyslog-omstdout \
+    rsyslog-relp \
     less \
     netcat-openbsd \
     curl \
