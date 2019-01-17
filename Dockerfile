@@ -17,7 +17,7 @@ RUN apt-get update \
  && add-apt-repository ppa:adiscon/v8-stable \
  && apt-get update \
  && apt-get -y --no-install-suggests --no-install-recommends install \
-    rsyslog=8.39.0-0adiscon5xenial1 \
+    rsyslog=8.40.0-0adiscon1xenial1 \
     rsyslog-elasticsearch \
     rsyslog-kafka \
     rsyslog-mmfields \
@@ -43,4 +43,3 @@ COPY /docker-entrypoint.d/* /docker-entrypoint.d/
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 CMD ["/usr/sbin/rsyslogd", "-n", "-f", "/etc/rsyslog.conf"]
-
