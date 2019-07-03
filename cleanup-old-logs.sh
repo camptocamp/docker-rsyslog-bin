@@ -26,7 +26,7 @@ while true; do
   echo "=> about to check disk usage:"
   if check_du; then
     echo "==> above threshold (${PCT}%), triggering cleanup"
-    for i in $(seq 0 "$DAYS" | tac); do
+    for i in $(seq "$DAYS" -1 0); do
       if check_du; then
         echo "==> due to space constraints, removing the following elements, which are older than ${i} days old:"
         find /var/log -type f -mtime "+${i}" -ls -delete
