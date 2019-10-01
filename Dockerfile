@@ -28,6 +28,9 @@ RUN apt-get update \
     less \
     netcat-openbsd \
     curl \
+    ngrep \
+    tcpdump \
+    iputils-ping \
  && apt-get -y --purge --autoremove remove software-properties-common \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
