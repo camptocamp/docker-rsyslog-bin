@@ -17,7 +17,7 @@ RUN apt-get update \
  && add-apt-repository ppa:adiscon/v8-stable \
  && apt-get update \
  && apt-get -y --no-install-suggests --no-install-recommends install \
-    rsyslog=8.1908.0-0adiscon1bionic1 \
+    rsyslog=8.1910.0-0adiscon1bionic1 \
     rsyslog-elasticsearch \
     rsyslog-kafka \
     rsyslog-mmfields \
